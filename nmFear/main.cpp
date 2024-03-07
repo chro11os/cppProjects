@@ -3,6 +3,7 @@
 #include <cmath>
 using namespace std;
 
+
 class Login 
 {
 	public:	
@@ -59,18 +60,17 @@ int main()
 	cout << "Enter Choice: ";
 	cin >> choice;
 
+	Login log;
+	SignIn sign;
+
 	switch (choice)
 	{
 		case '1':
-			Login log;
 			log.Log();
-			return 0;
 		break;
 		
 		case '2':
-			SignIn sign;
 			sign.Sign();
-			return 0;
 		break;
 	}
 		

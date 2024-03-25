@@ -1,12 +1,9 @@
-#include <iostream>
+#include<iostream>
+#include<array>
 using namespace std;
 
+int arr[] = {1, 2, 3, 4, 5};
 int main()
 {
-	int num = 4;
-	int* ptr = &num;
-	
-	
-	cout << "Address: " << &num << endl;
-	
+cout << arr[0] << endl;
 }

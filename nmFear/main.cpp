@@ -3,6 +3,45 @@
 #include <cmath>
 using namespace std;
 
+class Player
+{
+	public:
+	struct 
+	{
+		float money;
+		float level;
+		int id;
+		int age;
+		string name;
+
+	} data;
+
+	void PlayerData()
+	{
+		String PlayerName;
+		String PlayerID;
+		boolean PlayerIsRich;
+		boolean PlayerIsPoor;
+		float PlayerMoney;
+		float PlayerIncome;
+
+		if (PlayerIsRich == 100000)
+		{
+			cout << "Top 1 Percent Earner" << endl;
+		}
+		else
+		{
+			cout << " Player is Below 50 percent profit earner" << endl;
+		}
+
+		
+
+	}
+
+	
+
+
+};
 
 class Login 
 {
@@ -25,6 +64,7 @@ class Login
 	
 };
 
+
 class SignIn
 {
 	public:
@@ -42,18 +82,34 @@ class SignIn
 		cout << "Enter a desired Password: ";
 		cin >> sign.signpass;
 	}
-					
+	
+};
+
+
+class Trade
+{
+	public:
+	struct 
+	{
+		float currency;
+		float price;
+	} money;
+		
+	
 };
 		
+
 int main()
 {
 	
-	cout << "1. Login" << endl;
-	cout << "2. Sign in" << endl;
-	cout << "3. Trade" << endl;
-	cout << "4. Buy" << endl;
-	cout << "5. Sell" << endl;
-	cout << "6. Exit" << endl;
+	cout << ". View Players" << endl;
+	cout << ". Login" << endl;
+	cout << ". Sign in" << endl;
+	cout << ". Trade" << endl;
+	cout << ". Check Balance" << endl;
+	cout << ". Buy" << endl;
+	cout << ". Sell" << endl;
+	cout << ". Exit" << endl;
 	cout << " " << endl;
 	char choice;
 
@@ -62,6 +118,7 @@ int main()
 
 	Login log;
 	SignIn sign;
+	Trade trade;
 
 	switch (choice)
 	{
@@ -72,6 +129,11 @@ int main()
 		case '2':
 			sign.Sign();
 		break;
+
+		case '3':
+			trade.money
+
+
 	}
 		
 }

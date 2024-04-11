@@ -18,7 +18,26 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainTextBasedGame.cpp",
+              "DocumentMoniker": "C:\\Users\\neilb\\Documents\\GitHub\\cppProjects\\AdvancedProjects\\MainTextBasedGame\\MainTextBasedGame.cpp",
+              "RelativeDocumentMoniker": "MainTextBasedGame.cpp",
+              "ToolTip": "C:\\Users\\neilb\\Documents\\GitHub\\cppProjects\\AdvancedProjects\\MainTextBasedGame\\MainTextBasedGame.cpp",
+              "RelativeToolTip": "MainTextBasedGame.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-04-11T06:53:40.628Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
@@ -28,21 +47,9 @@
               "RelativeDocumentMoniker": "MainStruct.h",
               "ToolTip": "C:\\Users\\neilb\\Documents\\GitHub\\cppProjects\\AdvancedProjects\\MainTextBasedGame\\MainStruct.h",
               "RelativeToolTip": "MainStruct.h",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAACAAAAANAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAUAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-04-11T08:20:53.49Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainTextBasedGame.cpp",
-              "DocumentMoniker": "C:\\Users\\neilb\\Documents\\GitHub\\cppProjects\\AdvancedProjects\\MainTextBasedGame\\MainTextBasedGame.cpp",
-              "RelativeDocumentMoniker": "MainTextBasedGame.cpp",
-              "ToolTip": "C:\\Users\\neilb\\Documents\\GitHub\\cppProjects\\AdvancedProjects\\MainTextBasedGame\\MainTextBasedGame.cpp",
-              "RelativeToolTip": "MainTextBasedGame.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-11T06:53:40.628Z",
+              "WhenOpened": "2024-04-11T08:20:53.49Z",
               "EditorCaption": ""
             }
           ]

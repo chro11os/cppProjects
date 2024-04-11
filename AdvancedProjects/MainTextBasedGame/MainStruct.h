@@ -18,7 +18,7 @@ using namespace std;
 	};
 
 	struct weapons { /// weapon float = damage
-		float gun = ; 
+		float gun; 
 		float dagger;
 	};
 

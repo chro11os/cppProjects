@@ -6,10 +6,15 @@ using namespace std;
 
 int main()
 {
-    class MainGame
-    {
-        
-    };
+    setting set;
+    object obj;
+    animal anim;
+    weapons weap;
+    defense def;
+    enemy enem;
+    rule rl;
     
+    cout << ""
+
 }
 

@@ -40,8 +40,9 @@ using namespace std;
 		bool stunned;
 		bool lifesteal;
 		bool missed;
+	};
 
-		/// player
+	struct player {
 		float hp;
 		float armor;
 	};

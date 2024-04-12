@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\AdvancedProjects",
+    "\\AdvancedProjects\\MainTextBasedGame"
   ],
-  "SelectedNode": "\\C:\\Users\\NEILB\\Documents\\GitHub\\cppProjects",
+  "SelectedNode": "\\AdvancedProjects\\MainTextBasedGame\\MainTextBasedGame.sln",
   "PreviewInSolutionExplorer": false
 }

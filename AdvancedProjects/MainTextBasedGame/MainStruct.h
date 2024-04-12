@@ -23,7 +23,7 @@ using namespace std;
 	};
 
 	struct defense { /// defense float = armor
-		float woodenArmor;
+		float woodenArmor = 20.0;
 		float steelArmor;
 		float militaryArmor;
 	};

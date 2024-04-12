@@ -23,7 +23,7 @@ int main() {
     enemy enem;
     rule rl; 
     
-    cout << ""
+    cout << def.woodenArmor << endl;
 
 }
 

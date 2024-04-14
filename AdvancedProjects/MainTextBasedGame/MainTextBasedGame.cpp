@@ -23,7 +23,7 @@ int main() {
     enemy enem;
     rule rl; 
     
-    cout << def.woodenArmor << endl;
+    cout << "you Encounter an enemy" << endl;
 
 }
 

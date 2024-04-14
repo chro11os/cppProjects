@@ -28,11 +28,6 @@ using namespace std;
 		float militaryArmor;
 	};
 
-	struct enemy {
-		float zombie;
-		float bird;
-	};
-
 	struct rule { /// mechanics 
 		/// damage
 		bool damaged;
@@ -40,14 +35,7 @@ using namespace std;
 		bool stunned;
 		bool lifesteal;
 		bool missed;
-	};
-
-	struct player {
-		float hp;
-		float armor;
-	};
-
-	
+	};        
 
 
 #endif

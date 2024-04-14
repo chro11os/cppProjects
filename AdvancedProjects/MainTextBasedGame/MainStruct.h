@@ -37,5 +37,9 @@ using namespace std;
 		bool missed;
 	};        
 
+	struct MoveChoice {
+		bool attack;
+		bool run;
+	};
 
 #endif

@@ -7,12 +7,6 @@
 using namespace std;
 
 
-class criticalHits {
-    public:
-        rule rl;
-
-    
-};
 
 
 /*
@@ -22,6 +16,9 @@ class criticalHits {
 
 */
 // Game rule x Settings
+string choice; //move decision
+
+MoveChoice move;
 setting set;
 object obj;
 animal anim;
@@ -36,7 +33,12 @@ enemyCreeper creeper;
 
 int main() {
     
-    cout << "you Encounter an enemy" << endl;
+    cout << "You Encounter an enemy, What do you do? (Attack / Run) " << endl;
+    cin >> choice;
 
+    switch (choice) {
+        case "Attack":
+            cout << "You attacked the enemy, you did " << rl.damaged << "damage." << endl;
+    }
 }
 

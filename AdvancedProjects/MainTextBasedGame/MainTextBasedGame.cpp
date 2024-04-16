@@ -36,6 +36,7 @@ int main() {
     cout << "You Encounter an enemy, What do you do? (Attack / Run) " << endl;
     cin >> choice;
 
+    /*i think its better to use functions instead of switch for easy switching and modularity*/
     switch (choice) {
         case 'Attack':
             cout << "You attacked the enemy, you did " << rl.damaged << "damage." << endl;

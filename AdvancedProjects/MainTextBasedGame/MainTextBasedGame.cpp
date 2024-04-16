@@ -37,7 +37,7 @@ int main() {
     cin >> choice;
 
     switch (choice) {
-        case "Attack":
+        case 'Attack':
             cout << "You attacked the enemy, you did " << rl.damaged << "damage." << endl;
     }
 }

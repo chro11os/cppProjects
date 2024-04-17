@@ -4,12 +4,12 @@ using namespace std;
 
 struct enemySkeleton {
 	float skeletonHp;
-	int skelArrows;
+	int skeletonArrows;
 };
 
 struct enemyZombie {
-	float zombieHP;
-	float zombieArmor;
+	float zombieHP = 100.0;
+	float zombieArmor = 20.0;
 };
 
 struct enemyCreeper {

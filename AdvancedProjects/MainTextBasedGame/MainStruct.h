@@ -18,8 +18,8 @@ using namespace std;
 	};
 
 	struct weapons { /// weapon float = damage
-		float gun; 
-		float dagger;
+		float gun = 20.0; 
+		float dagger = 10.0;
 	};
 
 	struct defense { /// defense float = armor
@@ -30,10 +30,13 @@ using namespace std;
 
 	struct rule { /// mechanics 
 		/// damage
+		float baseDamage = 10.0;
+		float GunDamage;
+		float DaggerDamage;
 		bool damaged;
 		bool critical;
 		bool stunned;
-		bool lifesteal;
+		bool LifeSteal;
 		bool missed;
 	};        
 

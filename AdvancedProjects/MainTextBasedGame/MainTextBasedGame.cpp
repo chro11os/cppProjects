@@ -15,6 +15,12 @@ char choice; // move decision
 player mainPlayer;
 playerInv inventory;
 
+// EnemyMobs
+enemySkeleton skeleton;
+enemyZombie zombie;
+enemyCreeper creeper;
+
+// MoveSet
 MoveChoice move;
 setting set;
 object obj;
@@ -22,12 +28,6 @@ animal anim;
 weapons ItemDamage;
 defense def;
 rule rl;
-
-// EnemyMobs
-enemySkeleton skeleton;
-enemyZombie zombie;
-enemyCreeper creeper;
-
 void DamageRatioGun()
 {
     rl.GunDamage = ItemDamage.gun + rl.baseDamage - zombie.zombieArmor;

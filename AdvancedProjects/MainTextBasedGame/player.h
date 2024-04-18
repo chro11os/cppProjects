@@ -2,12 +2,14 @@
 #define PLAYER_H
 using namespace std;
 
-struct player {
+struct player
+{
 	float hp;
 	float armor;
 };
 
-struct playerInv {
+struct playerInv
+{
 	int StorageCount;
 };
 

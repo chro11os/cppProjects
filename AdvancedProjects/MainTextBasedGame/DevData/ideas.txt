@@ -1,0 +1,4 @@
+Ideas for the future of the game!
+= weight based inventory == the larger the item the more storage it consumes == it also affects movement time
+
+

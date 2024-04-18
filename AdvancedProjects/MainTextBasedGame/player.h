@@ -4,13 +4,13 @@ using namespace std;
 
 struct player
 {
-	float hp;
-	float armor;
+	float hp = 50;
+	float BaseArmor = 0;
 };
 
 struct playerInv
 {
-	int StorageCount;
+	int StorageCount = 10;
 };
 
 #endif

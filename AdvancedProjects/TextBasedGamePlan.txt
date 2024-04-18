@@ -13,7 +13,6 @@ Gameplay Mechanics:
     Player Actions: Determine the basic actions the player can perform (e.g., look, go (north/south/etc.), take, use, talk).
     Inventory: Decide if the player can carry objects. If so, create a system to track inventory items and their descriptions.
     Combat (Optional): If your game involves combat, design a simple combat system (e.g., turn-based attack/defense with health points).
-
 Implementation:
 
     Data Structures: Use a data structure (e.g., structs or classes) to represent locations, objects, and characters. Each should have relevant properties (e.g., location description, object name/usability, character name/dialogue).

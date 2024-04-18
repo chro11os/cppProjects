@@ -23,38 +23,26 @@ enemySkeleton skeleton;
 enemyZombie zombie;
 enemyCreeper creeper;
 
-void DamageRatio(){
+void DamageRatioGun(){
     rl.GunDamage = ItemDamage.gun + rl.baseDamage - zombie.zombieArmor;
-    rl.DaggerDamage = ItemDamage.dagger + rl.baseDamage - zombie.zombieArmor;
 }
 
-void Attack(){
-    cout << "Damage Done: "<< zombie.zombieHP - ItemDamage.gun << endl;;
+void DamageRatioDagger(){
+    rl.DaggerDamage = ItemDamage.dagger + (rl.baseDamage - zombie.zombieArmor) - 10;
 }
+
+void AttackGun(){
+    DamageRatioGun();
+    cout << "Gun Damage Done: "<< zombie.zombieHP - rl.GunDamage << endl;;
+}
+
+void AttackDagger(){
+    DamageRatioDagger();
+    cout << "Dagger Damage Done: " << zombie.zombieHP - rl.DaggerDamage << endl;
+}
+
 void Run(){
     cout << "Successfully escaped" << endl;
-}
-
-void weapon(){
-    ItemDamage.gun;
-    ItemDamage.dagger;
-    char choice;
-    cout << "Choose a weapon (Gun/Dagger): ";
-    cin >> choice;
-
-    switch (choice)
-    {
-    case 1:
-        cout << "Bang Bang Bang" << endl;
-                
-        break;
-    case 2:
-
-        break;
-    
-    default:
-        break;
-    }
 }
 
 
@@ -66,21 +54,21 @@ int main() {
 █░▀░█ █▀█ █ █░▀█ 
 
 */
-    cout << "You Encounter an enemy, What do you do? (1.Attack / 2.Run): ";
+    cout << "You Encounter an enemy, What do you do? (1.Attack with a Gun. / 2.Attack with a Dagger.): ";
     cin >> choice;
 
     /*i think its better to use functions instead of switch for easy switching and modularity*/
     switch (choice) {
         case '1':
-            Attack();
+            AttackGun();
         break;
         
         case '2':
-            Run();
+            AttackDagger();
         break;
         
         case '3':
-            weapon();
+            Run();
 
         default:
             cout << "Invalid choice" << endl;

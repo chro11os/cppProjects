@@ -11,7 +11,7 @@ using namespace std;
 // Game rule x Settings
 char choice; // move decision
 
-//player structure
+// player structure
 player mainPlayer;
 playerInv inventory;
 
@@ -56,8 +56,9 @@ void Run()
     cout << "Successfully escaped" << endl;
 }
 
-/*==========================================Cotton Field==================================*/
-class Item{
+/*==========================================Class Cotton Field============================*/
+class Item
+{
 public:
     string name;
     int quantity;
@@ -65,14 +66,16 @@ public:
     Item(string name, int quantity) : name(name), quantity(quantity) {}
 };
 
+class Inventory
+{
 
-class Inventory {
 private:
     vector<Item> items;
 
 public:
-    void addItem(string name, int quantity) {
-        
+    void addItem(string name, int quantity)
+    {
+
     }
 };
 
@@ -86,8 +89,6 @@ int main()
 
     */
 
-
-   
     cout << "You Encounter an enemy, What do you do? (1.Attack with a Gun. / 2.Attack with a Dagger. / 3. Ruuuunnnnn!): ";
     cin >> choice;
 

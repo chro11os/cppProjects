@@ -28,6 +28,7 @@ animal anim;
 weapons ItemDamage;
 defense def;
 rule rl;
+
 void DamageRatioGun()
 {
     rl.GunDamage = ItemDamage.gun + rl.baseDamage - zombie.zombieArmor;
@@ -88,6 +89,10 @@ int main()
     █░▀░█ █▀█ █ █░▀█
 
     */
+   while (true)
+   {
+
+   
 
     cout << "You Encounter an enemy, What do you do? (1.Attack with a Gun. / 2.Attack with a Dagger. / 3. Ruuuunnnnn!): ";
     cin >> choice;
@@ -95,19 +100,20 @@ int main()
     /*i think its better to use functions instead of switch for easy switching and modularity*/
     switch (choice)
     {
-    case '1':
-        AttackGun();
-        break;
+        case '1':
+            AttackGun();
+            break;
 
-    case '2':
-        AttackDagger();
-        break;
+        case '2':
+            AttackDagger();
+            break;
 
-    case '3':
-        Run();
-        break;
-    default:
-        cout << "Invalid choice" << endl;
-        break;
+        case '3':
+            Run();
+            break;
+        default:
+            cout << "Invalid choice" << endl;
+            break;
+        }
     }
 }

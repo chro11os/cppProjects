@@ -2,8 +2,9 @@
 #define PLAYER_H
 using namespace std;
 
-struct player
+struct user
 {
+	string name = "Ae";
 	float hp = 50;
 	float BaseArmor = 0;
 };

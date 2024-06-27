@@ -12,7 +12,7 @@ using namespace std;
 char choice; // move decision
 
 // player structure
-player mainPlayer;
+user mainPlayer;
 playerInv inventory;
 
 // EnemyMobs
@@ -54,7 +54,18 @@ void AttackDagger()
 
 void Run()
 {
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(1, 100);
+
+    int chance = dis(gen);
+
+    if(chance <= 70) 
+    {
     cout << "Successfully escaped" << endl;
+    } else {
+    cout <<  mainPlayer.name + " Failed to run";
+    }
 }
 
 /*==========================================Class Cotton Field============================*/
@@ -76,7 +87,7 @@ private:
 public:
     void addItem(string name, int quantity)
     {
-
+        
     }
 };
 
@@ -91,8 +102,6 @@ int main()
     */
    while (true)
    {
-
-   
 
     cout << "You Encounter an enemy, What do you do? (1.Attack with a Gun. / 2.Attack with a Dagger. / 3. Ruuuunnnnn!): ";
     cin >> choice;
@@ -114,6 +123,12 @@ int main()
         default:
             cout << "Invalid choice" << endl;
             break;
+
+            if (choice == '3') {
+                break;
+            } else {
+                break;
+            }
         }
     }
 }

@@ -10,8 +10,8 @@ struct enemySkeleton
 
 struct enemyZombie
 {
-	float zombieHP = 100.0;
-	float zombieArmor = 20.0;
+	const float zombieHP = 100.0;
+	const float zombieArmor = 20.0;
 };
 
 struct enemyCreeper

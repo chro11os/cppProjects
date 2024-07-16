@@ -1,5 +1,6 @@
 #ifndef MAINSTRUCT_H
 #define MAINSTRUCT_H
+#include <string>
 using namespace std;
 
 struct setting

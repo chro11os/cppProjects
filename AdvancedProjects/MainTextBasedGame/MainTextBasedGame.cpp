@@ -113,7 +113,25 @@ int main() {
     bool escaped = false;
 
     while (true) {
+        cout << R"(
+             __.-/|
+             \`o_O'
+              =( )=  +-----+-----+
+                U|   | am dragon |
+      /\  /\   / |   +-----+-----+
+     ) /^\) ^\/ _)\     |
+     )   /^\/   _) \    |
+     )   _ /  / _)  \___|_
+ /\  )/\/ ||  | )_)\___,|))
+<  >      |(,,) )__)    |
+ ||      /    \)___)\
+ | \____(      )___) )____
+  \______(_______;;;)__;;;))"
+        << '\n';
+
+        cout << '\n';
         cout << "You encounter an enemy, What do you do? (1.Attack with a Gun. / 2.Attack with a Dagger. / 3.Inventory /4. Run!): ";
+
         cin >> choice;
 
         switch (choice) {

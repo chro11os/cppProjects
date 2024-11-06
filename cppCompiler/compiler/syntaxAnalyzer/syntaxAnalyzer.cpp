@@ -4,6 +4,8 @@
 #include "parser.h"
 #include <iostream>
 
-Parser::Parser (Lexer& lexer) : lexer(lexer) {
+Parser::Parser (Lexer& lexer) : lexer(lexer), currentToken(currentToken(Token())) {
+
     nextToken();
+
 }

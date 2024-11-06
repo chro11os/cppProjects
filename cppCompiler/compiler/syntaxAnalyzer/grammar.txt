@@ -1,5 +1,7 @@
-S -> id = E
-E -> E + T | E - T | T
-T -> T * F | T / F | F
-F -> ( E ) | id | num
+# Grammar for simple arithmetic expressions with assignments
+# Format: Non-terminal -> Production Rules
 
+S -> id = E                 # An assignment: e.g., variable = expression
+E -> E + T | E - T | T      # Expression with addition/subtraction
+T -> T * F | T / F | F      # Term with multiplication/division
+F -> ( E ) | id | num       # Factor: can be a grouped expression, variable, or number

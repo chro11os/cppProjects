@@ -1,0 +1,10 @@
+# ninja log v6
+321	344	1728711680224573743	compiler	b7c9970fef32cd24
+3	443	1730691787377855890	CMakeFiles/compiler.dir/testing/test.cpp.o	3048321208dcc8c0
+2	49	1730897092495562296	build.ninja	f7abede61b87abf7
+3	442	1730691787377617141	CMakeFiles/compiler.dir/lexicalAnalyzer/lexicalAnalyzer.cpp.o	97d2a92ed9c9c580
+2	566	1730896934835793960	CMakeFiles/compiler.dir/main.cpp.o	d094ee69d317c158
+1	364	1728709897946269124	CMakeFiles/compiler.dir/lexicalAnalyzer.cpp.o	72bf2290c25367cd
+4	451	1730691787378493303	CMakeFiles/compiler.dir/Users/neilbragsguzman/Downloads/combined_gauss_methods_fixed.cpp.o	cfbce70acd3cf63e
+0	35	1730897092495562296	build.ninja	f7abede61b87abf7
+5	577	1730905755265376620	CMakeFiles/compiler.dir/lexicalAnalyzer/lexicalAnalyzer.cpp.o	97d2a92ed9c9c580

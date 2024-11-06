@@ -10,15 +10,17 @@
 
 class Parser {
 public:
-    Parser(Lexer& lexer);
+
+    Parser(Lexer& lexer, Token token): lexer(lexer)
     void parse();
+
 
 private:
     Lexer& lexer;
     Token currentToken;
 
+
     void nextToken();
-    
     void statement();
     void expression();
     void term();

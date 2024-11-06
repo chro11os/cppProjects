@@ -29,7 +29,6 @@ Token Lexer::getNextToken() {
         }
         return Token(TokenType::NUMBER, numStr);
     }
-
     if (std::isalpha(currentChar)) {
         std::string identifier;
         while (!isEnd() && std::isalnum(source[index])) {

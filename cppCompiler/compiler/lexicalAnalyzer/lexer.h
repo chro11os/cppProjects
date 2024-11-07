@@ -1,31 +1,25 @@
 #ifndef LEXER_H
 #define LEXER_H
 
-#include <string>
-#include <vector>
 #include "Token.h"
+#include <vector>
+#include <string>
 
-// Lexer class responsible for tokenizing input source code
 class Lexer {
 public:
-    // Constructor that initializes the lexer with source code input
-    explicit Lexer(const std::string& sourceCode);
-
-    // Function to retrieve the next token in the input
-    Token nextToken();
+    Lexer(const std::string& sourceCode); // Constructor
+    void tokenize(); // Tokenizes the source code
+    Token nextToken(); // Retrieve the next token
+    std::vector<Token> getTokens() const { return tokens; }
 
 private:
-    std::string sourceCode; // The source code to tokenize
-    size_t currentIndex;    // Current index in the source code
-    int lineNumber;         // Current line number for error tracking
+    std::string sourceCode;
+    size_t currentPosition;
+    int lineNumber;
+    std::vector<Token> tokens;
+    size_t tokenIndex = 0; // Track position in the tokens vector
 
-    // Helper functions for lexical analysis
-    char peek() const;           // Peek at the current character without consuming it
-    char advance();              // Advance to the next character and return the current one
-    void skipWhitespace();       // Skip over whitespace characters
-    Token identifierOrKeyword(); // Recognize keywords or identifiers
-    Token number();              // Recognize numerical literals
-    Token symbol();              // Recognize operators and symbols
+    void advance(); // Moves to the next character
 };
 
 #endif // LEXER_H

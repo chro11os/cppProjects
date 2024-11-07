@@ -2,24 +2,25 @@
 #define SEMANTIC_ANALYZER_H
 
 #include <memory>
-#include "symbolTable.h"
-#include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/syntaxAnalyzer/parser.h"  // For ASTNode
+#include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/syntaxAnalyzer/parser.h"      // Assuming ASTNode is defined in this file
+#include "symbolTable.h"  // Includes the SymbolTable class
 
-// SemanticAnalyzer class to perform type and scope checking
 class SemanticAnalyzer {
 public:
-    explicit SemanticAnalyzer(std::shared_ptr<ASTNode> root);
+    explicit SemanticAnalyzer(const std::shared_ptr<ASTNode>& root);
 
-    // Run the semantic analysis on the AST
+    // Analyze the AST and check for semantic errors
     void analyze();
 
 private:
     std::shared_ptr<ASTNode> root;
     SymbolTable symbolTable;
 
-    void checkNode(std::shared_ptr<ASTNode> node);
-    void checkAssignment(std::shared_ptr<ASTNode> node);
-    void checkExpression(std::shared_ptr<ASTNode> node);
+    void analyzeNode(const std::shared_ptr<ASTNode>& node);
+
+    // Helper functions for checking declarations and types
+    void checkDeclaration(const std::shared_ptr<ASTNode>& node);
+    void checkAssignment(const std::shared_ptr<ASTNode>& node);
 };
 
 #endif // SEMANTIC_ANALYZER_H

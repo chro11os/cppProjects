@@ -3,18 +3,31 @@
 
 #include <vector>
 #include <string>
-#include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/IR_generation/IRGenerator.h" // For ThreeAddressCode
+#include <memory>
+#include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/syntaxAnalyzer/parser.h"  // Use the absolute path if needed
+
+// Structure for a single IR instruction (e.g., three-address code)
+struct IRInstruction {
+    std::string op;     // Operation (e.g., "ADD", "STORE")
+    std::string arg1;   // First argument
+    std::string arg2;   // Second argument (if applicable)
+    std::string result; // Result or destination
+};
 
 class CodeGenerator {
 public:
-    explicit CodeGenerator(const std::vector<ThreeAddressCode>& optimizedCode);
-    std::vector<std::string> generateAssembly();
+    explicit CodeGenerator(const std::shared_ptr<ASTNode>& root);
+    void generateIR();                   // Generates intermediate code
+    void printIR() const;                // Prints the IR for debugging
 
 private:
-    const std::vector<ThreeAddressCode>& optimizedCode;
-    std::vector<std::string> assemblyCode;
+    std::shared_ptr<ASTNode> root;
+    std::vector<IRInstruction> irCode;   // Vector to hold generated IR instructions
 
-    void generateInstruction(const ThreeAddressCode& code);
+    // Helper functions to generate IR for specific node types
+    std::string generateExpression(const std::shared_ptr<ASTNode>& node);
+    void generateAssignment(const std::shared_ptr<ASTNode>& node);
+    void generateDeclaration(const std::shared_ptr<ASTNode>& node); // Add this declaration
 };
 
 #endif // CODE_GENERATOR_H

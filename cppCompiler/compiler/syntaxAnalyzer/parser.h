@@ -3,10 +3,10 @@
 
 #include <memory>
 #include <vector>
-#include <stdexcept>
+#include <string>
 #include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/lexicalAnalyzer/Token.h"
 
-// AST Node structure representing nodes in the AST
+// AST Node structure
 struct ASTNode {
     std::string value;
     std::vector<std::shared_ptr<ASTNode>> children;
@@ -18,20 +18,23 @@ struct ASTNode {
 class Parser {
 public:
     explicit Parser(const std::vector<Token>& tokens);
-    std::shared_ptr<ASTNode> parse();  // Entry point for parsing
+    std::shared_ptr<ASTNode> parse();
 
 private:
     std::vector<Token> tokens;
     size_t currentTokenIndex;
 
-    Token peek() const;                  // Peek at the current token
-    Token advance();                     // Advance to the next token
-    bool match(TokenType type);          // Check and consume token if type matches
+    Token peek() const;
+    Token advance();
+    bool match(TokenType type);
 
-    std::shared_ptr<ASTNode> parseAssignment(); // Parse assignment rules
-    std::shared_ptr<ASTNode> parseExpression(); // Parse expressions
-    std::shared_ptr<ASTNode> parseTerm();       // Parse terms
-    std::shared_ptr<ASTNode> parseFactor();     // Parse factors
+    // Declaration for parseStatement and parseDeclaration
+    std::shared_ptr<ASTNode> parseStatement();
+    std::shared_ptr<ASTNode> parseDeclaration();
+    std::shared_ptr<ASTNode> parseAssignment();
+    std::shared_ptr<ASTNode> parseExpression();
+    std::shared_ptr<ASTNode> parseTerm();
+    std::shared_ptr<ASTNode> parseFactor();
 };
 
 #endif // PARSER_H

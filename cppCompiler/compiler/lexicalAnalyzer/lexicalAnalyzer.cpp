@@ -1,74 +1,81 @@
 #include "lexer.h"
-#include <cctype>
 
-// Constructor that initializes the lexer with the source code input
+// Constructor to initialize Lexer with source code
 Lexer::Lexer(const std::string& sourceCode)
-    : sourceCode(sourceCode), currentIndex(0), lineNumber(1) {}
-
-// Peek at the current character without consuming it
-char Lexer::peek() const {
-    return currentIndex < sourceCode.size() ? sourceCode[currentIndex] : '\0';
+    : sourceCode(sourceCode), currentPosition(0), lineNumber(1) {
+    tokenize(); // Automatically tokenize upon initialization
 }
 
-// Advance to the next character, updating the current index and line number if needed
-char Lexer::advance() {
-    char currentChar = peek();
-    currentIndex++;
-    if (currentChar == '\n') lineNumber++; // Track new lines for error reporting
-    return currentChar;
-}
+// Method to tokenize the source code
+void Lexer::tokenize() {
+    while (currentPosition < sourceCode.size()) {
+        char currentChar = sourceCode[currentPosition];
 
-// Skip over whitespace characters in the source code
-void Lexer::skipWhitespace() {
-    while (isspace(peek())) {
+        // Check for semicolon
+        if (currentChar == ';') {
+            tokens.push_back(Token(TokenType::SEMICOLON, ";", lineNumber));
+            advance();
+            continue;
+        }
+
+        // Check for assignment operator '='
+        if (currentChar == '=') {
+            tokens.push_back(Token(TokenType::ASSIGNMENT, "=", lineNumber));
+            advance();
+            continue;
+        }
+
+        // Check for operators (+, -, *, /)
+        if (currentChar == '+' || currentChar == '-' || currentChar == '*' || currentChar == '/') {
+            tokens.push_back(Token(TokenType::OPERATOR, std::string(1, currentChar), lineNumber));
+            advance();
+            continue;
+        }
+
+        // Check for identifiers (starting with a letter)
+        if (isalpha(currentChar)) {
+            std::string lexeme;
+            while (isalnum(currentChar)) {  // Continue while alphanumeric
+                lexeme += currentChar;
+                advance();
+                currentChar = sourceCode[currentPosition];
+            }
+            tokens.push_back(Token(TokenType::IDENTIFIER, lexeme, lineNumber));
+            continue;
+        }
+
+        // Check for literals (numbers)
+        if (isdigit(currentChar)) {
+            std::string lexeme;
+            while (isdigit(currentChar)) {  // Continue while numeric
+                lexeme += currentChar;
+                advance();
+                currentChar = sourceCode[currentPosition];
+            }
+            tokens.push_back(Token(TokenType::LITERAL, lexeme, lineNumber));
+            continue;
+        }
+
+        // Advance to the next character if no match
         advance();
     }
+
+    // Add end of file token at the end
+    tokens.push_back(Token(TokenType::END_OF_FILE, "", lineNumber));
 }
 
-// Retrieve the next token in the source code
+// Method to retrieve the next token
 Token Lexer::nextToken() {
-    skipWhitespace(); // Skip any whitespace before reading a token
-    char currentChar = peek();
-
-    // Determine the type of token based on the current character
-    if (isalpha(currentChar)) return identifierOrKeyword(); // Check for keywords or identifiers
-    if (isdigit(currentChar)) return number();              // Check for numbers
-    if (currentChar == '+' || currentChar == '-' || currentChar == '=') return symbol(); // Operators
-
-    // End of input reached
-    if (currentChar == '\0') {
-        return Token(TokenType::END_OF_FILE, "", lineNumber);
+    if (tokenIndex < tokens.size()) {
+        return tokens[tokenIndex++];
     }
-
-    // Unknown character encountered
-    advance();
-    return Token(TokenType::UNKNOWN, std::string(1, currentChar), lineNumber);
+    return Token(TokenType::END_OF_FILE, "", lineNumber); // Return END_OF_FILE if no more tokens
 }
 
-// Identify keywords or identifiers in the source code
-Token Lexer::identifierOrKeyword() {
-    std::string lexeme;
-    while (isalnum(peek())) {
-        lexeme += advance();
+// Method to move the lexer to the next character
+void Lexer::advance() {
+    currentPosition++;
+    if (currentPosition < sourceCode.size() && sourceCode[currentPosition] == '\n') {
+        lineNumber++;
     }
-
-    // Determine if lexeme is a keyword (e.g., "int", "cout", "cin") or an identifier
-    TokenType type = (lexeme == "int" || lexeme == "cout" || lexeme == "cin") ? TokenType::KEYWORD : TokenType::IDENTIFIER;
-    return Token(type, lexeme, lineNumber);
-}
-
-// Identify numerical literals in the source code
-Token Lexer::number() {
-    std::string lexeme;
-    while (isdigit(peek())) {
-        lexeme += advance();
-    }
-    return Token(TokenType::LITERAL, lexeme, lineNumber);
-}
-
-// Identify operators or symbols in the source code
-Token Lexer::symbol() {
-    char currentChar = advance();
-    TokenType type = (currentChar == '=') ? TokenType::ASSIGNMENT : TokenType::OPERATOR;
-    return Token(type, std::string(1, currentChar), lineNumber);
 }

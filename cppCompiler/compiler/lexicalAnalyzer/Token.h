@@ -4,13 +4,14 @@
 #include <string>
 
 enum class TokenType {
-    KEYWORD,
-    IDENTIFIER,
-    OPERATOR,
-    LITERAL,
-    ASSIGNMENT,
-    END_OF_FILE,
-    UNKNOWN
+    KEYWORD = 1,
+    IDENTIFIER = 1,
+    OPERATOR = 2,
+    LITERAL = 3,
+    ASSIGNMENT = 4,
+    SEMICOLON = 5,
+    END_OF_FILE = 6,
+    UNKNOWN = 7
 };
 
 class Token {

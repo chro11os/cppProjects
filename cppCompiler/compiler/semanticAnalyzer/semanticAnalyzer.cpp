@@ -2,48 +2,59 @@
 #include <stdexcept>
 #include <iostream>
 
-// Initialize the analyzer with the root of the AST
-SemanticAnalyzer::SemanticAnalyzer(std::shared_ptr<ASTNode> root)
+SemanticAnalyzer::SemanticAnalyzer(const std::shared_ptr<ASTNode>& root)
     : root(root) {}
 
-// Run the semantic checks on the AST
+// Analyze the AST and check for semantic errors
 void SemanticAnalyzer::analyze() {
-    checkNode(root);
+    analyzeNode(root);
 }
 
-// Recursively check each node in the AST
-void SemanticAnalyzer::checkNode(std::shared_ptr<ASTNode> node) {
-    if (node->value == "Assignment") {
+// Recursively analyze each node in the AST
+void SemanticAnalyzer::analyzeNode(const std::shared_ptr<ASTNode>& node) {
+    if (!node) return;
+
+    // Check if the node is a declaration or assignment
+    if (node->value == "Declaration") {
+        checkDeclaration(node);
+    } else if (node->value == "Assignment") {
         checkAssignment(node);
-    } else {
-        for (const auto& child : node->children) {
-            checkNode(child);
-        }
+    }
+
+    // Recursively analyze each child node
+    for (const auto& child : node->children) {
+        analyzeNode(child);
     }
 }
 
-// Check assignment statements
-void SemanticAnalyzer::checkAssignment(std::shared_ptr<ASTNode> node) {
-    // The first child is the variable, the second is the expression
-    std::string variableName = node->children[0]->value;
+// Check declarations and add variables to the symbol table
+void SemanticAnalyzer::checkDeclaration(const std::shared_ptr<ASTNode>& node) {
+    if (node->children.size() < 2) {
+        throw std::runtime_error("Invalid declaration structure");
+    }
 
-    // Declare the variable if it's the first assignment
+    std::string variableName = node->children[1]->value; // Variable name is the second child
+    if (symbolTable.isDeclared(variableName)) {
+        throw std::runtime_error("Variable '" + variableName + "' already declared");
+    }
+
+    // Declare variable as INTEGER type
+    symbolTable.declareVariable(variableName, VariableType::INTEGER);
+}
+
+// Check assignments for undeclared variables and type consistency
+void SemanticAnalyzer::checkAssignment(const std::shared_ptr<ASTNode>& node) {
+    if (node->children.size() < 2) {
+        throw std::runtime_error("Invalid assignment structure");
+    }
+
+    std::string variableName = node->children[0]->value; // Left-hand side variable
+
+    // Check if the variable is declared
     if (!symbolTable.isDeclared(variableName)) {
-        symbolTable.declareVariable(variableName, VariableType::INTEGER);
+        throw std::runtime_error("Undeclared variable '" + variableName + "' in assignment");
     }
 
-    // Check the expression assigned to the variable
-    checkExpression(node->children[1]);
-}
-
-// Check expressions for type correctness
-void SemanticAnalyzer::checkExpression(std::shared_ptr<ASTNode> node) {
-    // Check for type mismatches or undeclared variables
-    if (node->value == "+" || node->value == "-") {
-        for (const auto& child : node->children) {
-            if (child->value != "num" && !symbolTable.isDeclared(child->value)) {
-                throw std::runtime_error("Undeclared variable: " + child->value);
-            }
-        }
-    }
+    // For now, assume all variables are INTEGERs; check if expressions involve only INTEGERs
+    // Further type checking can be added as needed, based on AST structure and project requirements
 }

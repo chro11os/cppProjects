@@ -7,6 +7,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <string>
 
 enum class VariableType {
     INTEGER,
@@ -24,6 +25,7 @@ public:
 
     // Get the type of a variable
     VariableType getType(const std::string& name) const;
+
 
 private:
     std::unordered_map<std::string, VariableType> table;

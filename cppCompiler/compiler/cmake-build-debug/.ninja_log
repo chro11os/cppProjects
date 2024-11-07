@@ -1,10 +1,19 @@
 # ninja log v6
 321	344	1728711680224573743	compiler	b7c9970fef32cd24
 3	443	1730691787377855890	CMakeFiles/compiler.dir/testing/test.cpp.o	3048321208dcc8c0
-2	49	1730897092495562296	build.ninja	f7abede61b87abf7
-3	442	1730691787377617141	CMakeFiles/compiler.dir/lexicalAnalyzer/lexicalAnalyzer.cpp.o	97d2a92ed9c9c580
+0	35	1730950766147797815	build.ninja	f7abede61b87abf7
+4	310	1730926487185749862	CMakeFiles/compiler.dir/lexicalAnalyzer/lexicalAnalyzer.cpp.o	97d2a92ed9c9c580
 2	566	1730896934835793960	CMakeFiles/compiler.dir/main.cpp.o	d094ee69d317c158
 1	364	1728709897946269124	CMakeFiles/compiler.dir/lexicalAnalyzer.cpp.o	72bf2290c25367cd
 4	451	1730691787378493303	CMakeFiles/compiler.dir/Users/neilbragsguzman/Downloads/combined_gauss_methods_fixed.cpp.o	cfbce70acd3cf63e
-0	35	1730897092495562296	build.ninja	f7abede61b87abf7
-5	577	1730905755265376620	CMakeFiles/compiler.dir/lexicalAnalyzer/lexicalAnalyzer.cpp.o	97d2a92ed9c9c580
+6	445	1730951488686412507	CMakeFiles/compiler.dir/semanticAnalyzer/symbolTable.cpp.o	b154c63126608aca
+7	470	1730951488687828185	CMakeFiles/compiler.dir/codeGeneration/CodeGenerator.cpp.o	c5f78de6136ebbf0
+5	477	1730951488685887544	CMakeFiles/compiler.dir/lexicalAnalyzer/lexicalAnalyzer.cpp.o	97d2a92ed9c9c580
+5	481	1730951488686134880	CMakeFiles/compiler.dir/syntaxAnalyzer/syntaxAnalyzer.cpp.o	eccbd21bb95e4560
+6	537	1730951488686733801	CMakeFiles/compiler.dir/semanticAnalyzer/semanticAnalyzer.cpp.o	47fabcd426ff78
+7	569	1730951488687520308	CMakeFiles/compiler.dir/fckOptimization/Optimizer.cpp.o	54e4ff05b45b21ac
+6	574	1730951488687151180	CMakeFiles/compiler.dir/IR_generation/IRGenerator.cpp.o	7f64deccbeffe21a
+4	612	1730951488685027662	CMakeFiles/compiler.dir/main.cpp.o	d094ee69d317c158
+612	695	1730951489292628458	compiler	9c52b2ed20524996
+3	453	1730951614172902102	CMakeFiles/compiler.dir/main.cpp.o	d094ee69d317c158
+453	480	1730951614622558638	compiler	9c52b2ed20524996

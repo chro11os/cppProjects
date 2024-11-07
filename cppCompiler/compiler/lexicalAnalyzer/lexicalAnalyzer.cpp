@@ -1,81 +1,74 @@
-#include "Token.h"
-#include "lexer.h"   // Include the Lexer header
-#include <cctype>    // For isdigit, isalpha
-#include <iostream>
-#include <string>
-#include <cstring>
+#include "lexer.h"
+#include <cctype>
 
-// Constructor to initialize Lexer with source code
-Lexer::Lexer(std::string source) : source(source), index(0) {}
+// Constructor that initializes the lexer with the source code input
+Lexer::Lexer(const std::string& sourceCode)
+    : sourceCode(sourceCode), currentIndex(0), lineNumber(1) {}
 
-// Checks if we've reached the end of the source code
-bool Lexer::isEnd() const {
-    return index >= source.size();
+// Peek at the current character without consuming it
+char Lexer::peek() const {
+    return currentIndex < sourceCode.size() ? sourceCode[currentIndex] : '\0';
 }
 
-// Main function to retrieve the next token from the source code
-Token Lexer::getNextToken() {
-    // Skip any whitespace characters
-    while (!isEnd() && std::isspace(source[index])) {
-        index++;
+// Advance to the next character, updating the current index and line number if needed
+char Lexer::advance() {
+    char currentChar = peek();
+    currentIndex++;
+    if (currentChar == '\n') lineNumber++; // Track new lines for error reporting
+    return currentChar;
+}
+
+// Skip over whitespace characters in the source code
+void Lexer::skipWhitespace() {
+    while (isspace(peek())) {
+        advance();
+    }
+}
+
+// Retrieve the next token in the source code
+Token Lexer::nextToken() {
+    skipWhitespace(); // Skip any whitespace before reading a token
+    char currentChar = peek();
+
+    // Determine the type of token based on the current character
+    if (isalpha(currentChar)) return identifierOrKeyword(); // Check for keywords or identifiers
+    if (isdigit(currentChar)) return number();              // Check for numbers
+    if (currentChar == '+' || currentChar == '-' || currentChar == '=') return symbol(); // Operators
+
+    // End of input reached
+    if (currentChar == '\0') {
+        return Token(TokenType::END_OF_FILE, "", lineNumber);
     }
 
-    // If we've reached the end, return an END token
-    if (isEnd()) {
-        return Token(TokenType::END, "");
+    // Unknown character encountered
+    advance();
+    return Token(TokenType::UNKNOWN, std::string(1, currentChar), lineNumber);
+}
+
+// Identify keywords or identifiers in the source code
+Token Lexer::identifierOrKeyword() {
+    std::string lexeme;
+    while (isalnum(peek())) {
+        lexeme += advance();
     }
 
-    // Variable to build the current string being processed
-    std::string currentString = "";
-    char currentChar = source[index];
+    // Determine if lexeme is a keyword (e.g., "int", "cout", "cin") or an identifier
+    TokenType type = (lexeme == "int" || lexeme == "cout" || lexeme == "cin") ? TokenType::KEYWORD : TokenType::IDENTIFIER;
+    return Token(type, lexeme, lineNumber);
+}
 
-    // Check for numeric literals (numbers)
-    if (std::isdigit(currentChar)) {
-        std::string numStr;
-        while (!isEnd() && std::isdigit(source[index])) {
-            numStr += source[index++];
-        }
-        return Token(TokenType::NUMBER, numStr); // Return a NUMBER token
+// Identify numerical literals in the source code
+Token Lexer::number() {
+    std::string lexeme;
+    while (isdigit(peek())) {
+        lexeme += advance();
     }
+    return Token(TokenType::LITERAL, lexeme, lineNumber);
+}
 
-    // Check for keywords and identifiers
-    
-    if (std::isalpha(currentChar)) {
-        // Build the current identifier/keyword string
-        while (!isEnd() && std::isalpha(source[index])) {
-            currentString += source[index++];
-        }
-
-        // Check if it's a specific keyword ("cin" or "cout")
-        if (currentString == "cin") {
-            return Token(TokenType::CIN, currentString); // Return CIN token
-        }
-        if (currentString == "cout") {
-            return Token(TokenType::COUT, currentString); // Return COUT token
-        }
-
-        // Check if it matches other keywords ("if", "else", "while")
-        if (currentString == "if" || currentString == "else" || currentString == "while") {
-            return Token(TokenType::KEYWORD, currentString); // Return KEYWORD token
-        }
-
-        // Otherwise, treat it as a general identifier (variable name)
-        return Token(TokenType::IDENTIFIER, currentString);
-    }
-
-    // Check for operators (+, -, *, /)
-    if (currentChar == '+' || currentChar == '-' || currentChar == '*' || currentChar == '/') {
-        index++;
-        return Token(TokenType::OPERATOR, std::string(1, currentChar)); // Return OPERATOR token
-    }
-
-    // Check for punctuation symbols like parentheses and semicolon
-    if (currentChar == '(' || currentChar == ')' || currentChar == ';') {
-        index++;
-        return Token(TokenType::PUNCTUATION, std::string(1, currentChar)); // Return PUNCTUATION token
-    }
-
-    // Skip unrecognized characters and continue to the next token
-    index++;
-    return getNextToken();
+// Identify operators or symbols in the source code
+Token Lexer::symbol() {
+    char currentChar = advance();
+    TokenType type = (currentChar == '=') ? TokenType::ASSIGNMENT : TokenType::OPERATOR;
+    return Token(type, std::string(1, currentChar), lineNumber);
 }

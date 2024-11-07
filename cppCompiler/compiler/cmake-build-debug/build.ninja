@@ -73,6 +73,36 @@ build CMakeFiles/compiler.dir/syntaxAnalyzer/syntaxAnalyzer.cpp.o: CXX_COMPILER_
   OBJECT_DIR = CMakeFiles/compiler.dir
   OBJECT_FILE_DIR = CMakeFiles/compiler.dir/syntaxAnalyzer
 
+build CMakeFiles/compiler.dir/semanticAnalyzer/symbolTable.cpp.o: CXX_COMPILER__compiler_unscanned_Debug /Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/semanticAnalyzer/symbolTable.cpp || cmake_object_order_depends_target_compiler
+  DEP_FILE = CMakeFiles/compiler.dir/semanticAnalyzer/symbolTable.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/compiler.dir
+  OBJECT_FILE_DIR = CMakeFiles/compiler.dir/semanticAnalyzer
+
+build CMakeFiles/compiler.dir/semanticAnalyzer/semanticAnalyzer.cpp.o: CXX_COMPILER__compiler_unscanned_Debug /Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/semanticAnalyzer/semanticAnalyzer.cpp || cmake_object_order_depends_target_compiler
+  DEP_FILE = CMakeFiles/compiler.dir/semanticAnalyzer/semanticAnalyzer.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/compiler.dir
+  OBJECT_FILE_DIR = CMakeFiles/compiler.dir/semanticAnalyzer
+
+build CMakeFiles/compiler.dir/IR_generation/IRGenerator.cpp.o: CXX_COMPILER__compiler_unscanned_Debug /Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/IR_generation/IRGenerator.cpp || cmake_object_order_depends_target_compiler
+  DEP_FILE = CMakeFiles/compiler.dir/IR_generation/IRGenerator.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/compiler.dir
+  OBJECT_FILE_DIR = CMakeFiles/compiler.dir/IR_generation
+
+build CMakeFiles/compiler.dir/fckOptimization/Optimizer.cpp.o: CXX_COMPILER__compiler_unscanned_Debug /Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/fckOptimization/Optimizer.cpp || cmake_object_order_depends_target_compiler
+  DEP_FILE = CMakeFiles/compiler.dir/fckOptimization/Optimizer.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/compiler.dir
+  OBJECT_FILE_DIR = CMakeFiles/compiler.dir/fckOptimization
+
+build CMakeFiles/compiler.dir/codeGeneration/CodeGenerator.cpp.o: CXX_COMPILER__compiler_unscanned_Debug /Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/codeGeneration/CodeGenerator.cpp || cmake_object_order_depends_target_compiler
+  DEP_FILE = CMakeFiles/compiler.dir/codeGeneration/CodeGenerator.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/compiler.dir
+  OBJECT_FILE_DIR = CMakeFiles/compiler.dir/codeGeneration
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target compiler
@@ -81,7 +111,7 @@ build CMakeFiles/compiler.dir/syntaxAnalyzer/syntaxAnalyzer.cpp.o: CXX_COMPILER_
 #############################################
 # Link the executable compiler
 
-build compiler: CXX_EXECUTABLE_LINKER__compiler_Debug CMakeFiles/compiler.dir/main.cpp.o CMakeFiles/compiler.dir/lexicalAnalyzer/lexicalAnalyzer.cpp.o CMakeFiles/compiler.dir/testing/test.cpp.o CMakeFiles/compiler.dir/syntaxAnalyzer/syntaxAnalyzer.cpp.o
+build compiler: CXX_EXECUTABLE_LINKER__compiler_Debug CMakeFiles/compiler.dir/main.cpp.o CMakeFiles/compiler.dir/lexicalAnalyzer/lexicalAnalyzer.cpp.o CMakeFiles/compiler.dir/testing/test.cpp.o CMakeFiles/compiler.dir/syntaxAnalyzer/syntaxAnalyzer.cpp.o CMakeFiles/compiler.dir/semanticAnalyzer/symbolTable.cpp.o CMakeFiles/compiler.dir/semanticAnalyzer/semanticAnalyzer.cpp.o CMakeFiles/compiler.dir/IR_generation/IRGenerator.cpp.o CMakeFiles/compiler.dir/fckOptimization/Optimizer.cpp.o CMakeFiles/compiler.dir/codeGeneration/CodeGenerator.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk
   OBJECT_DIR = CMakeFiles/compiler.dir
   POST_BUILD = :

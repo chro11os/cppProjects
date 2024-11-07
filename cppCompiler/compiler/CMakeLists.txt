@@ -13,6 +13,16 @@ add_executable(compiler main.cpp lexicalAnalyzer/lexicalAnalyzer.cpp
         syntaxAnalyzer/parser.h
         syntaxAnalyzer/syntaxAnalyzer.cpp
         main.cpp
+        semanticAnalyzer/symbolTable.h
+        semanticAnalyzer/symbolTable.cpp
+        semanticAnalyzer/semanticAnalyzer.h
+        semanticAnalyzer/semanticAnalyzer.cpp
+        IR_generation/IRGenerator.h
+        IR_generation/IRGenerator.cpp
+        fckOptimization/Optimizer.h
+        fckOptimization/Optimizer.cpp
+        codeGeneration/codeGenerator.h
+        codeGeneration/CodeGenerator.cpp
 
 )
 

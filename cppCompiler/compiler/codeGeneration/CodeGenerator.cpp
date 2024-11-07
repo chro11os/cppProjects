@@ -1,4 +1,4 @@
-#include "CodeGenerator.h"
+#include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/codeGeneration/CodeGenerator.h"
 #include <iostream>
 
 CodeGenerator::CodeGenerator(const std::shared_ptr<ASTNode>& root)
@@ -15,6 +15,11 @@ void CodeGenerator::generateIR() {
             }
         }
     }
+}
+
+// Getter for accessing the generated IR code
+std::vector<IRInstruction>& CodeGenerator::getIRCode() {
+    return irCode;
 }
 
 // Helper function to generate IR for declarations

@@ -1,52 +1,63 @@
-#include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/fckOptimization/Optimizer.h"
-#include <unordered_set>
-#include <sstream>
+#include "Optimizer.h"
+#include <iostream>
+#include <unordered_map>
+#include <string>
 
-// Constructor to initialize with the IR code
-Optimizer::Optimizer(std::vector<ThreeAddressCode>& irCode) : irCode(irCode) {}
+Optimizer::Optimizer(std::vector<IRInstruction>& irCode) : irCode(irCode) {}
 
-// Apply all optimizations
+// Main function to run all optimizations
 void Optimizer::optimize() {
     constantFolding();
-    eliminateDeadCode();
+    deadCodeElimination();
 }
 
-// Constant folding: simplify constant expressions in the IR code
+// Constant folding: simplify expressions with constant values
 void Optimizer::constantFolding() {
-    for (auto& code : irCode) {
-        if (code.op == "+" || code.op == "-" || code.op == "*" || code.op == "/") {
-            int left, right;
+    for (auto& instr : irCode) {
+        // Only optimize ADD, SUB, MUL, DIV with numeric arguments
+        if ((instr.op == "ADD" || instr.op == "SUB" || instr.op == "MUL" || instr.op == "DIV") &&
+            isdigit(instr.arg1[0]) && isdigit(instr.arg2[0])) {
 
-            // Check if both operands are constants (integers)
-            if (std::istringstream(code.operand1) >> left && std::istringstream(code.operand2) >> right) {
-                int result = 0;
-                if (code.op == "+") result = left + right;
-                else if (code.op == "-") result = left - right;
-                else if (code.op == "*") result = left * right;
-                else if (code.op == "/") result = right != 0 ? left / right : 0;
+            // Convert arguments to integers and perform the operation
+            int left = std::stoi(instr.arg1);
+            int right = std::stoi(instr.arg2);
+            int result;
 
-                code.op = ""; // Clear operator
-                code.operand1 = std::to_string(result); // Set result as single operand
-                code.operand2 = ""; // Clear second operand
-            }
+            if (instr.op == "ADD") result = left + right;
+            else if (instr.op == "SUB") result = left - right;
+            else if (instr.op == "MUL") result = left * right;
+            else if (instr.op == "DIV") result = right != 0 ? left / right : left; // Prevent division by zero
+
+            // Replace instruction with a single STORE of the result
+            instr.op = "STORE";
+            instr.arg1 = std::to_string(result);
+            instr.arg2 = "";
+            instr.result = instr.result;
         }
     }
 }
 
-// Dead code elimination: remove unused assignments
-void Optimizer::eliminateDeadCode() {
-    std::unordered_set<std::string> usedVars;
+// Dead code elimination: remove instructions with unused results
+void Optimizer::deadCodeElimination() {
+    std::unordered_map<std::string, bool> usedVars;
 
-    // Mark all variables that are used on the right side of assignments
-    for (const auto& code : irCode) {
-        if (!code.operand1.empty() && code.op.empty()) { // Only consider simple assignments
-            usedVars.insert(code.result);
+    // Mark variables that are used later in the code
+    for (const auto& instr : irCode) {
+        if (!instr.result.empty()) {
+            usedVars[instr.result] = false;
+        }
+        if (!instr.arg1.empty() && usedVars.find(instr.arg1) != usedVars.end()) {
+            usedVars[instr.arg1] = true;
+        }
+        if (!instr.arg2.empty() && usedVars.find(instr.arg2) != usedVars.end()) {
+            usedVars[instr.arg2] = true;
         }
     }
 
-    // Remove lines where a variable is assigned but never used
+    // Remove instructions that produce unused results
     irCode.erase(std::remove_if(irCode.begin(), irCode.end(),
-        [&usedVars](const ThreeAddressCode& code) {
-            return !usedVars.count(code.result) && code.op.empty();
-        }), irCode.end());
+                                [&usedVars](const IRInstruction& instr) {
+                                    return !instr.result.empty() && !usedVars[instr.result];
+                                }),
+                 irCode.end());
 }

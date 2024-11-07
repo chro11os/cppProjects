@@ -2,6 +2,8 @@
 #include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/syntaxAnalyzer/parser.h"
 #include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/semanticAnalyzer/semanticAnalyzer.h"
 #include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/codeGeneration/CodeGenerator.h"
+#include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/fckOptimization/Optimizer.h"
+
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -33,17 +35,20 @@ int main() {
 
     // Perform semantic analysis
     SemanticAnalyzer analyzer(ast);
-    try {
-        analyzer.analyze();
-        std::cout << "Semantic analysis completed successfully.\n";
-    } catch (const std::runtime_error& e) {
-        std::cerr << "Semantic error: " << e.what() << "\n";
-    }
+    analyzer.analyze();
+    std::cout << "Semantic analysis completed successfully.\n";
+
+    // Generate and print intermediate code
     CodeGenerator codeGen(ast);
     codeGen.generateIR();
-    std::cout << "\nIntermediate Representation (IR):\n";
+    std::cout << "\nIntermediate Representation (IR) before optimization:\n";
+    codeGen.printIR();
+
+    // Optimize the IR using the getIRCode() method
+    Optimizer optimizer(codeGen.getIRCode());
+    optimizer.optimize();
+    std::cout << "\nIntermediate Representation (IR) after optimization:\n";
     codeGen.printIR();
 
     return 0;
-
 }

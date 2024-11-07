@@ -4,22 +4,22 @@
 #include "Token.h"
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 class Lexer {
 public:
-    Lexer(const std::string& sourceCode); // Constructor
-    void tokenize(); // Tokenizes the source code
-    Token nextToken(); // Retrieve the next token
-    std::vector<Token> getTokens() const { return tokens; }
+    Lexer(const std::string& source);
+    Token nextToken();
+    std::vector<Token> getTokens(); // Tokenizes the entire source
 
 private:
-    std::string sourceCode;
-    size_t currentPosition;
-    int lineNumber;
-    std::vector<Token> tokens;
-    size_t tokenIndex = 0; // Track position in the tokens vector
-
-    void advance(); // Moves to the next character
+    std::string source;
+    size_t pos;
+    bool isAtEnd() const;
+    char advance();
+    char peek() const;
+    Token makeToken(TokenType type, const std::string& lexeme);
+    std::unordered_map<std::string, TokenType> keywords;
 };
 
 #endif // LEXER_H

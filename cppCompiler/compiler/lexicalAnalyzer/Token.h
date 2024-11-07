@@ -4,28 +4,18 @@
 #include <string>
 
 enum class TokenType {
-    KEYWORD = 1,
-    IDENTIFIER = 1,
-    OPERATOR = 2,
-    LITERAL = 3,
-    ASSIGNMENT = 4,
-    SEMICOLON = 5,
-    END_OF_FILE = 6,
-    UNKNOWN = 7
+    IDENTIFIER, NUMBER, STRING_LITERAL,
+    INT, FLOAT, BOOL, STRING,
+    COUT, CIN,
+    PLUS, MINUS, MULTIPLY, DIVIDE,
+    ASSIGN, SEMICOLON,
+    LEFT_SHIFT, RIGHT_SHIFT,
+    END_OF_FILE, ERROR
 };
 
-class Token {
-public:
+struct Token {
     TokenType type;
     std::string lexeme;
-    int lineNumber;
-
-    // Default constructor
-    Token() : type(TokenType::UNKNOWN), lexeme(""), lineNumber(0) {}
-
-    // Parameterized constructor
-    Token(TokenType type, const std::string& lexeme, int lineNumber)
-        : type(type), lexeme(lexeme), lineNumber(lineNumber) {}
 };
 
 #endif // TOKEN_H

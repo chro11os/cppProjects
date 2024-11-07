@@ -5,9 +5,12 @@
 #include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/fckOptimization/Optimizer.h"
 
 #include <iostream>
+#include <fstream>
 #include <vector>
+#include <string>
 #include <memory>
 
+// Function to print the Abstract Syntax Tree (AST)
 void printAST(const std::shared_ptr<ASTNode>& node, int depth = 0) {
     if (!node) return;
     std::cout << std::string(depth * 2, ' ') << node->value << "\n";
@@ -16,39 +19,74 @@ void printAST(const std::shared_ptr<ASTNode>& node, int depth = 0) {
     }
 }
 
-int main() {
-    Lexer lexer("int x = 5; x = x + 10;");
+void compileCode(const std::string& sourceCode) {
+    // Lexical Analysis
+    Lexer lexer(sourceCode);
     std::vector<Token> tokens = lexer.getTokens();
 
-    // Print tokens for verification
     std::cout << "Tokens:\n";
     for (const auto& token : tokens) {
         std::cout << "Token: " << token.lexeme << ", Type: " << static_cast<int>(token.type) << "\n";
     }
 
+    // Parsing
     Parser parser(tokens);
     std::shared_ptr<ASTNode> ast = parser.parse();
 
-    // Print AST structure
     std::cout << "\nAbstract Syntax Tree:\n";
     printAST(ast);
 
-    // Perform semantic analysis
-    SemanticAnalyzer analyzer(ast);
-    analyzer.analyze();
-    std::cout << "Semantic analysis completed successfully.\n";
-
-    // Generate and print intermediate code
+    // Intermediate Representation
     CodeGenerator codeGen(ast);
     codeGen.generateIR();
-    std::cout << "\nIntermediate Representation (IR) before optimization:\n";
-    codeGen.printIR();
+    std::cout << "\nIntermediate Representation (IR):\n";
+    for (const auto& ir : codeGen.getIRCode()) {
+        std::cout << ir.op << " " << ir.arg1 << " " << ir.arg2 << " -> " << ir.result << "\n";
+    }
 
-    // Optimize the IR using the getIRCode() method
-    Optimizer optimizer(codeGen.getIRCode());
-    optimizer.optimize();
-    std::cout << "\nIntermediate Representation (IR) after optimization:\n";
-    codeGen.printIR();
+    // C++ Code Generation
+    codeGen.generateCpp();
+    std::cout << "\nGenerated C++ Code:\n";
+    codeGen.printCpp();
+}
+
+int main() {
+    int choice;
+    std::cout << "Select an option:\n";
+    std::cout << "1. Upload a file\n";
+    std::cout << "2. Code a file\n";
+    std::cout << "Enter choice: ";
+    std::cin >> choice;
+    std::cin.ignore();
+
+    if (choice == 1) {
+        std::string filePath;
+        std::cout << "Enter file path: ";
+        std::getline(std::cin, filePath);
+
+        std::ifstream file(filePath);
+        if (!file) {
+            std::cerr << "Error: Could not open file.\n";
+            return 1;
+        }
+        std::string sourceCode((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+        compileCode(sourceCode);
+
+    } else if (choice == 2) {
+        std::string sourceCode, line;
+        std::cout << "Enter your code below. Type 'COMPILE' on a new line to finish and compile:\n";
+
+        while (true) {
+            std::getline(std::cin, line);
+            if (line == "COMPILE") break;
+            sourceCode += line + "\n";
+        }
+
+        compileCode(sourceCode);
+    } else {
+        std::cerr << "Invalid choice. Exiting.\n";
+        return 1;
+    }
 
     return 0;
 }

@@ -1,81 +1,74 @@
 #include "lexer.h"
+#include <cctype>
 
-// Constructor to initialize Lexer with source code
-Lexer::Lexer(const std::string& sourceCode)
-    : sourceCode(sourceCode), currentPosition(0), lineNumber(1) {
-    tokenize(); // Automatically tokenize upon initialization
+Lexer::Lexer(const std::string& source) : source(source), pos(0) {
+    keywords = {
+        {"int", TokenType::INT}, {"float", TokenType::FLOAT},
+        {"bool", TokenType::BOOL}, {"string", TokenType::STRING},
+        {"cout", TokenType::COUT}, {"cin", TokenType::CIN}
+    };
 }
 
-// Method to tokenize the source code
-void Lexer::tokenize() {
-    while (currentPosition < sourceCode.size()) {
-        char currentChar = sourceCode[currentPosition];
-
-        // Check for semicolon
-        if (currentChar == ';') {
-            tokens.push_back(Token(TokenType::SEMICOLON, ";", lineNumber));
-            advance();
-            continue;
-        }
-
-        // Check for assignment operator '='
-        if (currentChar == '=') {
-            tokens.push_back(Token(TokenType::ASSIGNMENT, "=", lineNumber));
-            advance();
-            continue;
-        }
-
-        // Check for operators (+, -, *, /)
-        if (currentChar == '+' || currentChar == '-' || currentChar == '*' || currentChar == '/') {
-            tokens.push_back(Token(TokenType::OPERATOR, std::string(1, currentChar), lineNumber));
-            advance();
-            continue;
-        }
-
-        // Check for identifiers (starting with a letter)
-        if (isalpha(currentChar)) {
-            std::string lexeme;
-            while (isalnum(currentChar)) {  // Continue while alphanumeric
-                lexeme += currentChar;
-                advance();
-                currentChar = sourceCode[currentPosition];
-            }
-            tokens.push_back(Token(TokenType::IDENTIFIER, lexeme, lineNumber));
-            continue;
-        }
-
-        // Check for literals (numbers)
-        if (isdigit(currentChar)) {
-            std::string lexeme;
-            while (isdigit(currentChar)) {  // Continue while numeric
-                lexeme += currentChar;
-                advance();
-                currentChar = sourceCode[currentPosition];
-            }
-            tokens.push_back(Token(TokenType::LITERAL, lexeme, lineNumber));
-            continue;
-        }
-
-        // Advance to the next character if no match
-        advance();
-    }
-
-    // Add end of file token at the end
-    tokens.push_back(Token(TokenType::END_OF_FILE, "", lineNumber));
+bool Lexer::isAtEnd() const {
+    return pos >= source.length();
 }
 
-// Method to retrieve the next token
+char Lexer::advance() {
+    return source[pos++];
+}
+
+char Lexer::peek() const {
+    return isAtEnd() ? '\0' : source[pos];
+}
+
+Token Lexer::makeToken(TokenType type, const std::string& lexeme) {
+    return Token{type, lexeme};
+}
+
 Token Lexer::nextToken() {
-    if (tokenIndex < tokens.size()) {
-        return tokens[tokenIndex++];
+    while (!isAtEnd()) {
+        char c = advance();
+        if (isspace(c)) continue;
+
+        if (isalpha(c)) {
+            std::string lexeme(1, c);
+            while (isalnum(peek())) lexeme += advance();
+            if (keywords.find(lexeme) != keywords.end()) {
+                return makeToken(keywords[lexeme], lexeme);
+            }
+            return makeToken(TokenType::IDENTIFIER, lexeme);
+        }
+
+        if (isdigit(c)) {
+            std::string lexeme(1, c);
+            while (isdigit(peek())) lexeme += advance();
+            return makeToken(TokenType::NUMBER, lexeme);
+        }
+
+        switch (c) {
+            case '+': return makeToken(TokenType::PLUS, "+");
+            case '-': return makeToken(TokenType::MINUS, "-");
+            case '*': return makeToken(TokenType::MULTIPLY, "*");
+            case '/': return makeToken(TokenType::DIVIDE, "/");
+            case '=': return makeToken(TokenType::ASSIGN, "=");
+            case ';': return makeToken(TokenType::SEMICOLON, ";");
+
+            case '<':
+                if (peek() == '<') { advance(); return makeToken(TokenType::LEFT_SHIFT, "<<"); }
+                break;
+            case '>':
+                if (peek() == '>') { advance(); return makeToken(TokenType::RIGHT_SHIFT, ">>"); }
+                break;
+        }
     }
-    return Token(TokenType::END_OF_FILE, "", lineNumber); // Return END_OF_FILE if no more tokens
+    return makeToken(TokenType::END_OF_FILE, "");
 }
 
-// Method to move the lexer to the next character
-void Lexer::advance() {
-    currentPosition++;
-    if (currentPosition < sourceCode.size() && sourceCode[currentPosition] == '\n') {
-        lineNumber++;
+std::vector<Token> Lexer::getTokens() {
+    std::vector<Token> tokens;
+    while (!isAtEnd()) {
+        tokens.push_back(nextToken());
     }
+    tokens.push_back(makeToken(TokenType::END_OF_FILE, ""));
+    return tokens;
 }

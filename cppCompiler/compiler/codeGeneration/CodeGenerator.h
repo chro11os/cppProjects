@@ -6,31 +6,29 @@
 #include <memory>
 #include "/Users/neilbragsguzman/Documents/GitHub/cppProjects/cppCompiler/compiler/syntaxAnalyzer/parser.h"
 
-// Structure for a single IR instruction (e.g., three-address code)
 struct IRInstruction {
-    std::string op;     // Operation (e.g., "ADD", "STORE")
-    std::string arg1;   // First argument
-    std::string arg2;   // Second argument (if applicable)
-    std::string result; // Result or destination
+    std::string op;
+    std::string arg1;
+    std::string arg2;
+    std::string result;
 };
 
 class CodeGenerator {
 public:
-    explicit CodeGenerator(const std::shared_ptr<ASTNode>& root);  // Constructor with AST root node
-    void generateIR();                                             // Generates intermediate code
-    void printIR() const;                                          // Prints the IR for debugging
+    explicit CodeGenerator(const std::shared_ptr<ASTNode>& root);
+    void generateIR();
+    void generateCpp();
+    void printCpp() const;
 
-    // Getter to access the generated IR for optimization
     std::vector<IRInstruction>& getIRCode();
 
 private:
-    std::shared_ptr<ASTNode> root;                                 // Root of the AST
-    std::vector<IRInstruction> irCode;                             // Holds generated IR instructions
+    std::shared_ptr<ASTNode> root;
+    std::vector<IRInstruction> irCode;
+    std::vector<std::string> cppCode;
 
-    // Helper functions to generate IR for specific node types
-    std::string generateExpression(const std::shared_ptr<ASTNode>& node);  // For expressions
-    void generateAssignment(const std::shared_ptr<ASTNode>& node);         // For assignments
-    void generateDeclaration(const std::shared_ptr<ASTNode>& node);        // For declarations
+    void generateDeclaration(const std::shared_ptr<ASTNode>& node);
+    void generateCout(const std::shared_ptr<ASTNode>& node);
 };
 
 #endif // CODE_GENERATOR_H

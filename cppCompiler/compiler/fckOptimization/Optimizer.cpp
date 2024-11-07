@@ -1,7 +1,7 @@
 #include "Optimizer.h"
-#include <iostream>
 #include <unordered_map>
 #include <string>
+#include <iostream>
 
 Optimizer::Optimizer(std::vector<IRInstruction>& irCode) : irCode(irCode) {}
 
@@ -37,7 +37,7 @@ void Optimizer::constantFolding() {
     }
 }
 
-// Dead code elimination: remove instructions with unused results
+// Dead code elimination: remove instructions with unused results, but keep essential STORE instructions
 void Optimizer::deadCodeElimination() {
     std::unordered_map<std::string, bool> usedVars;
 
@@ -54,10 +54,14 @@ void Optimizer::deadCodeElimination() {
         }
     }
 
-    // Remove instructions that produce unused results
+    // Remove only temporary variables (e.g., t1, t2) that are not used
     irCode.erase(std::remove_if(irCode.begin(), irCode.end(),
                                 [&usedVars](const IRInstruction& instr) {
-                                    return !instr.result.empty() && !usedVars[instr.result];
+                                    // Keep all STORE instructions to actual variables (e.g., x) and essential computations
+                                    return instr.op == "STORE" &&
+                                           !instr.result.empty() &&
+                                           instr.result[0] == 't' &&  // Temporary variable
+                                           !usedVars[instr.result];
                                 }),
                  irCode.end());
 }

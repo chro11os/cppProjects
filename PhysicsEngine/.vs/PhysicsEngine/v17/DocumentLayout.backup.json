@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\neilb\\Documents\\GitHub\\cppProjects\\PhysicsEngine\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{82FF6066-B05B-4BEC-A2FC-04768DA757D8}|PhysicsEngine.vcxproj|C:\\Users\\neilb\\Documents\\GitHub\\cppProjects\\PhysicsEngine\\PhysicsEngine.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{82FF6066-B05B-4BEC-A2FC-04768DA757D8}|PhysicsEngine.vcxproj|solutionrelative:PhysicsEngine.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PhysicsEngine.cpp",
+              "DocumentMoniker": "C:\\Users\\neilb\\Documents\\GitHub\\cppProjects\\PhysicsEngine\\PhysicsEngine.cpp",
+              "RelativeDocumentMoniker": "PhysicsEngine.cpp",
+              "ToolTip": "C:\\Users\\neilb\\Documents\\GitHub\\cppProjects\\PhysicsEngine\\PhysicsEngine.cpp",
+              "RelativeToolTip": "PhysicsEngine.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-14T17:10:38.559Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
